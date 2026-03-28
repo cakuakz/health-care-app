@@ -1,17 +1,14 @@
 "use client";
 
 import CustomInput from "@/components/input/custom-input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -19,40 +16,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronRight, Search } from "lucide-react";
+import { TMenuItem, TMenuSection } from "@/models/sidebar";
+import { ArrowLeft, ChevronRight, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-
-function CollapseButton() {
-  const { toggleSidebar, state } = useSidebar();
-
-  return (
-    <Button
-      className="absolute -right-3 top-32 z-10 size-6 rounded-lg border bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground"
-      onClick={toggleSidebar}
-      size="icon"
-      variant="outline"
-    >
-      {state === "expanded" ? <ArrowLeft className="size-3" /> : <ArrowRight className="size-3" />}
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
-  );
-}
-
-interface MenuItem {
-  title: string;
-  icon?: React.ReactNode;
-  href?: string;
-  badge?: number;
-  tooltip?: string;
-  child?: MenuItem[];
-}
-
-export interface MenuSection {
-  label: string;
-  items: MenuItem[];
-}
+import SidebarLogoHeader from "./header";
+import NavGroupHeader from "./nav-group/header";
+import NavGroupContent from "./nav-group/content";
 
 function RecursiveMenuItem({
   item,
@@ -61,7 +32,7 @@ function RecursiveMenuItem({
   onClick,
   isExpanded,
 }: {
-  item: MenuItem;
+  item: TMenuItem;
   level: number;
   isActive: boolean;
   onClick: () => void;
@@ -150,12 +121,12 @@ function RecursiveMenuItem({
   );
 }
 
-export function MainSidebar({ menu }: { menu: MenuSection[] }) {
+export function MainSidebar({ menu }: { menu: TMenuSection[] }) {
   const pathname = usePathname();
   const router = useRouter();
   const { state } = useSidebar();
 
-  const renderMenuItems = (items?: MenuItem[], level = 0) => {
+  const renderMenuItems = (items?: TMenuItem[], level = 0) => {
     return (
       items &&
       items.map((item, index) => (
@@ -174,70 +145,24 @@ export function MainSidebar({ menu }: { menu: MenuSection[] }) {
   const referralsItem = menu[0].items.find(item => item.href === "/referrals");
 
   return (
-    <Sidebar className="z-40 border-r" collapsible="icon">
-      <CollapseButton />
+    <Sidebar variant="inset" collapsible="icon">
       <SidebarHeader className="border-b p-4">
-        <Popover>
-          <PopoverTrigger asChild>
-            <div
-              className={cn(
-                "flex cursor-pointer items-center gap-3 px-2",
-                state !== "expanded" && "justify-center"
-              )}
-            >
-              <Avatar className="size-8">
-                <AvatarImage src="/img/user-profile-1.svg" />
-                <AvatarFallback>NB</AvatarFallback>
-              </Avatar>
-              {state === "expanded" && (
-                <>
-                  <div className="flex flex-col">
-                    <p className="text-sm font-semibold">Nathaniel Brooks</p>
-                    <span className="text-sm font-medium">nathaniel@healthcare.com</span>
-                  </div>
-                  <Button
-                    className="!hover:bg-transparent ml-auto !border-0 !bg-transparent"
-                    size="icon"
-                    variant="outline"
-                  >
-                    <ChevronDown className="size-4" />
-                  </Button>
-                </>
-              )}
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="w-40 p-2">
-            <div className="flex flex-col space-y-2">
-              <Button
-                className="w-full justify-start"
-                onClick={() => console.log("My Account clicked")}
-                variant="ghost"
-              >
-                My Account
-              </Button>
-              <Button
-                className="w-full justify-start text-red-500 hover:bg-red-50 hover:text-red-600"
-                onClick={() => console.log("Logout clicked")}
-                variant="ghost"
-              >
-                Logout
-              </Button>
-            </div>
-          </PopoverContent>
-        </Popover>
-
+        <SidebarLogoHeader isExpanded={state === "expanded"} />
         {/* Search bar (only when expanded) */}
         {state === "expanded" && (
-          <div className="mt-4 flex gap-2">
+          <div className="flex gap-2">
             <CustomInput
-              icon={<Search className="size-4 text-gray-600" />}
+              icon={<Search className="size-4 text-[#A1A1AA]" />}
               placeholder="Search"
               type="search"
+              inputWrapperClassName="!bg-[#EAEAEA]"
+              inputClassName="!bg-[#EAEAEA] !text-[#A1A1AA] focus-visible:ring-0 focus-visible:ring-offset-0"
             />
           </div>
         )}
       </SidebarHeader>
       <SidebarContent>
+        {/* Back button (only on referrals page) */}
         {pathname.includes("/referrals") && (
           <SidebarGroup>
             <SidebarGroupContent>
@@ -257,6 +182,8 @@ export function MainSidebar({ menu }: { menu: MenuSection[] }) {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
+
+        {/* Menu items (conditionally rendered based on pathname) */}
         {!pathname.includes("/referrals") ? (
           menu.map((section, sectionIndex) => {
             const isOtherMenu = section.label === "OTHER MENU";
@@ -265,99 +192,17 @@ export function MainSidebar({ menu }: { menu: MenuSection[] }) {
               return (
                 <Collapsible className="group/collapsible" defaultOpen key={sectionIndex}>
                   <SidebarGroup>
-                    <SidebarGroupLabel asChild>
-                      <CollapsibleTrigger className="flex items-center">
-                        {section.label}
-                        <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                      </CollapsibleTrigger>
-                    </SidebarGroupLabel>
-
-                    <CollapsibleContent>
-                      <SidebarGroupContent className="pl-2">
-                        <SidebarMenu>
-                          {section.items.map((item, itemIndex) => (
-                            <SidebarMenuItem key={itemIndex}>
-                              <SidebarMenuButton
-                                asChild
-                                className={cn(
-                                  pathname === item.href
-                                    ? "pointer-events-none bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))]"
-                                    : "hover:bg-accent hover:text-sidebar-accent-foreground"
-                                )}
-                                disabled={pathname === item.href}
-                                tooltip={item.tooltip || item.title}
-                              >
-                                <Link
-                                  className={
-                                    pathname === item.href ? "cursor-default" : "cursor-pointer"
-                                  }
-                                  href={item.href || "#"}
-                                >
-                                  {item.icon}
-                                  <span>{item.title}</span>
-                                  {item.badge ? (
-                                    <Badge
-                                      className="ml-auto size-5 justify-center rounded-md px-0"
-                                      variant="destructive"
-                                    >
-                                      {item.badge}
-                                    </Badge>
-                                  ) : null}
-                                </Link>
-                              </SidebarMenuButton>
-                            </SidebarMenuItem>
-                          ))}
-                        </SidebarMenu>
-                      </SidebarGroupContent>
-                    </CollapsibleContent>
+                    <NavGroupHeader label={section.label} isCollapsible />
+                    <NavGroupContent items={section.items} pathname={pathname} isCollapsible />
                   </SidebarGroup>
                 </Collapsible>
               );
             }
 
             return (
-              <SidebarGroup
-                className={sectionIndex === menu.length - 1 ? "mt-auto" : ""}
-                key={sectionIndex}
-              >
-                <SidebarGroupLabel className="text-xs font-normal text-muted-foreground">
-                  {pathname !== "/referrals" ? section.label : ""}
-                </SidebarGroupLabel>
-
-                <SidebarGroupContent className="pl-2">
-                  <SidebarMenu>
-                    {section.items.map((item, itemIndex) => (
-                      <SidebarMenuItem key={itemIndex}>
-                        <SidebarMenuButton
-                          asChild
-                          className={cn(
-                            pathname === item.href
-                              ? "pointer-events-none bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))]"
-                              : "hover:bg-accent hover:text-sidebar-accent-foreground"
-                          )}
-                          disabled={pathname === item.href}
-                          tooltip={item.tooltip || item.title}
-                        >
-                          <Link
-                            className={pathname === item.href ? "cursor-default" : "cursor-pointer"}
-                            href={item.href || "#"}
-                          >
-                            {item.icon}
-                            <span>{item.title}</span>
-                            {item.badge ? (
-                              <Badge
-                                className="ml-auto size-5 justify-center rounded-md px-0"
-                                variant="destructive"
-                              >
-                                {item.badge}
-                              </Badge>
-                            ) : null}
-                          </Link>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
+              <SidebarGroup key={sectionIndex}>
+                <NavGroupHeader label={pathname !== "/referrals" ? section.label : ""} />
+                <NavGroupContent items={section.items} pathname={pathname} />
               </SidebarGroup>
             );
           })

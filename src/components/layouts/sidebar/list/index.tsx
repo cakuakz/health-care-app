@@ -1,6 +1,6 @@
-import { MenuSection } from "@/components/layouts/sidebar";
 import { MedicalCardMockData } from "@/constant/mock/medical-card";
 import { convertToSlug } from "@/lib/utils";
+import { TMenuSection } from "@/models/sidebar";
 import {
   CircleHelp,
   LayoutDashboard,
@@ -12,7 +12,7 @@ import {
   Calendar,
 } from "lucide-react";
 
-export const SidebarMenuList: MenuSection[] = [
+export const SidebarMenuList: TMenuSection[] = [
   {
     label: "GENERAL",
     items: [
@@ -142,7 +142,7 @@ export const SidebarMenuList: MenuSection[] = [
     ],
   },
   {
-    label: "OTHER",
+    label: "HELP & SUPPORT",
     items: [
       {
         title: "Chat & Support",

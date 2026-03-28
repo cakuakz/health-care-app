@@ -1,14 +1,15 @@
 "use client";
 
 import { PageBreadcrumbProps, PageBreadcrumbs } from "@/components/breadcrumbs";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Bell, Settings, Check, Clock, Search } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import CustomInput from "@/components/input/custom-input";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Bell, Check, Clock, Search, Settings } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface PageHeaderProps {
@@ -21,12 +22,8 @@ export function PageHeader({ breadcrumbs = [] }: PageHeaderProps) {
     <header className="sticky top-0 z-30 w-full border-b bg-background/95 px-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center">
         <div className="flex items-center gap-3">
-          <Button asChild size="icon" variant="ghost">
-            <Link href="#" onClick={() => router.back()}>
-              <ArrowLeft className="size-4" />
-              <span className="sr-only">Go back</span>
-            </Link>
-          </Button>
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
           <PageBreadcrumbs items={breadcrumbs} />
         </div>
         <div className="flex flex-1 items-center justify-end gap-4">
