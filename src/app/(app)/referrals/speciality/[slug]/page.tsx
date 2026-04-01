@@ -1,9 +1,9 @@
 "use client";
 
 import { PageHeader } from "@/components/layouts/header";
-import SpecialityReferralClient from "../client";
-import { usePathname } from "next/navigation";
 import { formatSlug } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import SpecialityReferralClient from "../client";
 
 export default function SpecialityReferralsPage() {
   const pathname = usePathname();
@@ -18,7 +18,7 @@ export default function SpecialityReferralsPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <SpecialityReferralClient />
     </>
   );

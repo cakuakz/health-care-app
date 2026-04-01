@@ -1,9 +1,9 @@
 "use client";
 
 import { PageHeader } from "@/components/layouts/header";
-import PcpReferralClient from "../client";
-import { usePathname } from "next/navigation";
 import { formatSlug } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import PcpReferralClient from "../client";
 
 export default function PcpReferralsPage() {
   const pathname = usePathname();
@@ -18,7 +18,7 @@ export default function PcpReferralsPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <PcpReferralClient />
     </>
   );

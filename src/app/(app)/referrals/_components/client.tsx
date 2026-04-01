@@ -83,7 +83,7 @@ export default function ReferralClient() {
       <ScrollHorizontalButton onClick={scrollLeft} position="left" />
       <ScrollHorizontalButton onClick={scrollRight} position="right" />
 
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <MainContainer className="flex flex-col !p-0">
         {!isOnboarded && (
           <>

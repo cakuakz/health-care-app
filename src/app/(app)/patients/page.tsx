@@ -9,7 +9,7 @@ export default function PatientsPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <PatientClient />
     </>
   );

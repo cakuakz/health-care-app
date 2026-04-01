@@ -9,7 +9,7 @@ export default function ProviderNetworkPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <ProviderNetworkClient />
     </>
   );

@@ -223,7 +223,7 @@ export default function IncomingDocumentPage() {
   return (
     <>
       <SuccessDialog onClose={handleCloseSuccessModal} open={showSuccessDialog} />
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <MainContainer className="flex h-screen !bg-white !pl-0 !pr-7">
         <div className="flex w-24 flex-col items-center overflow-y-auto py-2">
           {Array.from({ length: totalPages }).map((_, index) => (

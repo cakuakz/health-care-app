@@ -1,5 +1,4 @@
 import { PageHeader } from "@/components/layouts/header";
-import React from "react";
 import EfaxClient from "./client";
 
 export default function EfaxPage() {
@@ -10,7 +9,7 @@ export default function EfaxPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <EfaxClient />
     </>
   );

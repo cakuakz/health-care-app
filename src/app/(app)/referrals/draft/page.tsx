@@ -12,7 +12,7 @@ export default function PriorityReferralsPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <ReferralDraftClient />
     </>
   );

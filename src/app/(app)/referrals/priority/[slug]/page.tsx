@@ -1,9 +1,9 @@
 "use client";
 
 import { PageHeader } from "@/components/layouts/header";
-import PriorityReferralClient from "../client";
-import { usePathname } from "next/navigation";
 import { formatSlug } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import PriorityReferralClient from "../client";
 
 export default function PriorityReferralsPage() {
   const pathname = usePathname();
@@ -18,7 +18,7 @@ export default function PriorityReferralsPage() {
 
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <PriorityReferralClient />
     </>
   );

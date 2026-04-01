@@ -1,6 +1,6 @@
 "use client";
 
-import { PageBreadcrumbProps, PageBreadcrumbs } from "@/components/breadcrumbs";
+import { PageBreadcrumbs } from "@/components/breadcrumbs";
 import CustomInput from "@/components/input/custom-input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,10 +11,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bell, Check, Clock, Search, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-interface PageHeaderProps {
-  breadcrumbs?: PageBreadcrumbProps[];
-}
 
 export function PageHeader() {
   const router = useRouter();
