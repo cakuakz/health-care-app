@@ -16,7 +16,7 @@ interface PageHeaderProps {
   breadcrumbs?: PageBreadcrumbProps[];
 }
 
-export function PageHeader({ breadcrumbs = [] }: PageHeaderProps) {
+export function PageHeader() {
   const router = useRouter();
   return (
     <header className="sticky top-0 z-30 w-full border-b bg-background/95 px-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -24,7 +24,7 @@ export function PageHeader({ breadcrumbs = [] }: PageHeaderProps) {
         <div className="flex items-center gap-3">
           <SidebarTrigger className="-ml-1" />
           <Separator orientation="vertical" className="mr-2 data-[orientation=vertical]:h-4" />
-          <PageBreadcrumbs items={breadcrumbs} />
+          <PageBreadcrumbs />
         </div>
         <div className="flex flex-1 items-center justify-end gap-4">
           <div className="w-64">

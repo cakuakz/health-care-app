@@ -11,7 +11,7 @@ export default function CalendarPage() {
 
   return (
     <MainContainer className="!p-0">
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <CalendarClient />
     </MainContainer>
   );

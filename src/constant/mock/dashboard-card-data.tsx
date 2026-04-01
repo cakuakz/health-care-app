@@ -1,4 +1,4 @@
-import type { DashboardCardProps } from "@/app/(app)/(index)/_components/dashboard-card-section";
+import type { DashboardCardProps } from "@/app/(app)/dashboard/_components/dashboard-card-section";
 import { CircleCheck } from "lucide-react";
 
 export const DashboardCardData: DashboardCardProps[] = [

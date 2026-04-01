@@ -95,7 +95,7 @@ export default function DashboardClient() {
       {!isOnboarded && (
         <div className="pointer-events-auto fixed inset-0 z-40 bg-black opacity-75" />
       )}
-      <PageHeader breadcrumbs={breadcrumbs} />
+      <PageHeader />
       <MainContainer>
         {!isOnboarded && (
           <>

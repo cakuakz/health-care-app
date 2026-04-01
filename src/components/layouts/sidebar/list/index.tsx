@@ -19,7 +19,7 @@ export const SidebarMenuList: TMenuSection[] = [
       {
         title: "Dashboard",
         icon: <LayoutDashboard className="size-4" />,
-        href: "/",
+        href: "/dashboard",
       },
       {
         title: "Approvals",
