@@ -17,6 +17,7 @@ import DashboardCardSection, { DashboardCardProps } from "./dashboard-card-secti
 import DashboardShortcuts from "./dashboard-shortcuts";
 import OnboardingProgressBox from "@/components/onboarding/progress-box";
 import StepBoxContainer from "@/components/onboarding/step-box-container";
+import MainButton from "@/components/button";
 
 export default function DashboardClient() {
   const [cardPropsArray, setCardPropsArray] = useState<MedicalCardTypes[]>(MedicalCardMockData);

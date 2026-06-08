@@ -7,6 +7,7 @@ import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -15,6 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { TMenuItem, TMenuSection } from "@/models/sidebar";
 import { ArrowLeft, ChevronRight, Search } from "lucide-react";
@@ -22,8 +24,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import SidebarLogoHeader from "./header";
-import NavGroupHeader from "./nav-group/header";
 import NavGroupContent from "./nav-group/content";
+import NavGroupHeader from "./nav-group/header";
+import ProfileBox from "./profile-box";
 
 function RecursiveMenuItem({
   item,
@@ -105,14 +108,16 @@ function RecursiveMenuItem({
         <Collapsible open={isOpen}>
           <CollapsibleContent>
             {item.child.map((childItem, index) => (
-              <RecursiveMenuItem
-                isActive={false}
-                isExpanded={isExpanded}
-                item={childItem}
-                key={index}
-                level={level + 1}
-                onClick={onClick}
-              />
+              <ul key={index}>
+                <RecursiveMenuItem
+                  isActive={false}
+                  isExpanded={isExpanded}
+                  item={childItem}
+                  key={index}
+                  level={level + 1}
+                  onClick={onClick}
+                />
+              </ul>
             ))}
           </CollapsibleContent>
         </Collapsible>
@@ -122,6 +127,7 @@ function RecursiveMenuItem({
 }
 
 export function MainSidebar({ menu }: { menu: TMenuSection[] }) {
+  const { data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
   const { state } = useSidebar();
@@ -171,7 +177,7 @@ export function MainSidebar({ menu }: { menu: TMenuSection[] }) {
                   <SidebarMenuButton
                     className="mt-5 w-full justify-start"
                     onClick={() => {
-                      router.replace("/");
+                      router.replace("/dashboard");
                     }}
                   >
                     <ArrowLeft className="mr-1 size-4" />
@@ -214,6 +220,9 @@ export function MainSidebar({ menu }: { menu: TMenuSection[] }) {
           </SidebarGroup>
         )}
       </SidebarContent>
+      <SidebarFooter>
+        <ProfileBox session={session} />
+      </SidebarFooter>
     </Sidebar>
   );
 }

@@ -4,6 +4,7 @@ import FormProvider from "@/components/hook-form-provider";
 import CustomFormInput from "@/components/input/custom-form-input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { signIn } from "@/lib/auth-client";
 import { UserLoginSchema, UserLoginSchemaType } from "@/schema/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -28,6 +29,13 @@ export default function UserLoginForm() {
   const onSubmit = (data: UserLoginSchemaType) => {
     console.log("Form Submitted:", data);
     router.push("/");
+  };
+
+  const handleGoogleSignIn = async () => {
+    await signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
   };
 
   return (
@@ -79,6 +87,7 @@ export default function UserLoginForm() {
             className="flex items-center justify-center gap-2 text-base !text-[#606060]"
             type="button"
             variant="outline"
+            onClick={handleGoogleSignIn}
           >
             <Image alt="Google Icon" height={24} src="/img/icons-google.svg" width={24} />
             Google
