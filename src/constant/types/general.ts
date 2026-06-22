@@ -15,6 +15,7 @@ export type SelectProps = {
 
 export type ChartProps = {
   title: string;
+  wrapperTitle?: string;
   icon?: React.ReactNode;
   children: React.ReactNode;
   isSelectFilter?: boolean;

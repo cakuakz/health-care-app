@@ -70,6 +70,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      dropShadow: {
+        "button-header": "0 0.89px 1.78px rgba(82, 88, 102, 0.09)",
+      },
       keyframes: {
         "accordion-down": {
           from: {

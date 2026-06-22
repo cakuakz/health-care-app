@@ -1,6 +1,7 @@
 "use client";
 
 import { PageBreadcrumbs } from "@/components/breadcrumbs";
+import MainButton from "@/components/button";
 import CustomInput from "@/components/input/custom-input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -28,9 +29,10 @@ export function PageHeader() {
               icon={<Search className="size-4 text-gray-600" />}
               placeholder="Search"
               type="search"
+              inputWrapperClassName="drop-shadow-button-header border rounded-lg border-border"
             />
           </div>
-          <Button size="icon" variant="ghost">
+          <Button size="icon" variant="ghost" className="drop-shadow-button-header border rounded-lg border-border">
             <Settings className="size-4" />
             <span className="sr-only">Settings</span>
           </Button>
@@ -121,7 +123,7 @@ function NotificationPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" className="drop-shadow-button-header border rounded-lg border-border">
           <Bell className="size-4" />
           <span className="sr-only">Notifications</span>
         </Button>

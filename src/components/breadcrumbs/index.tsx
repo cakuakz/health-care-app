@@ -36,7 +36,7 @@ export function PageBreadcrumbs() {
           <Fragment key={item.name}>
             {index !== breadcrumbs.length - 1 ? (
               <BreadcrumbItem>
-                <Link className="font-medium" href={item.href || "#"}>
+                <Link className="font-medium text-zinc-400" href={item.href || "#"}>
                   {item.name}
                 </Link>
               </BreadcrumbItem>
@@ -47,7 +47,7 @@ export function PageBreadcrumbs() {
               </BreadcrumbSeparator>
             ) : null}
             {index === breadcrumbs.length - 1 ? (
-              <BreadcrumbPage className="font-medium text-primary">{item.name}</BreadcrumbPage>
+              <BreadcrumbPage className="font-medium text-zinc-950">{item.name}</BreadcrumbPage>
             ) : null}
           </Fragment>
         ))}

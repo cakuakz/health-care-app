@@ -71,6 +71,7 @@ export default function ReferralInsight() {
         selectTriggerPlaceholder: "January",
       }}
       title="Referral Insight"
+      wrapperTitle="Referral Insight Chart"
     >
       <ChartContainer className="h-max w-full max-w-[380px]" config={referralInsightChartConfig}>
         <RadialBarChart

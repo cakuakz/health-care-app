@@ -29,6 +29,7 @@ export default function TodayActivity() {
       icon={<SquareChartGantt className="size-3 text-[#1757F7]" />}
       isSelectFilter={false}
       title="Today Activity"
+      wrapperTitle="Today Activity Overview"
     >
       {cardData.map((data, index) => (
         <TodayActivityCard

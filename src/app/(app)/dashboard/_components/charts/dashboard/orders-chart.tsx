@@ -46,6 +46,7 @@ export default function OrdersChart() {
         selectTriggerPlaceholder: "Last 3 Months",
       }}
       title="Orders"
+      wrapperTitle="Orders Chart"
     >
       <ChartContainer className="h-max w-full max-w-[380px]" config={ordersChartConfig}>
         <BarChart accessibilityLayer data={chartData}>

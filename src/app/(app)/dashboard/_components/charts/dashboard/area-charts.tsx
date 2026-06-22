@@ -57,6 +57,7 @@ export default function AreaCharts() {
         selectTriggerPlaceholder: "Last 3 Days",
       }}
       title="Funnel Steps"
+      wrapperTitle="Funnel Steps Chart"
     >
       <ChartContainer className="h-max w-full max-w-[380px]" config={chartConfig}>
         <AreaChart accessibilityLayer data={filteredData}>
@@ -90,10 +91,10 @@ export default function AreaCharts() {
             }
             cursor={false}
           />
-          <Area dataKey="Review" fill="#6893FF" stackId="a" stroke="#6893FF" type="natural" />
-          <Area dataKey="Received" fill="#9CBEFF" stackId="a" stroke="#9CBEFF" type="natural" />
-          <Area dataKey="Submitted" fill="#C5D9FF" stackId="a" stroke="#C5D9FF" type="natural" />
-          <Area dataKey="Completed" fill="#E5EEFF" stackId="a" stroke="#E5EEFF" type="natural" />
+          <Area dataKey="Reviewed" fill="#0B835B" stackId="a" stroke="#0B835B" type="natural" />
+          <Area dataKey="Received" fill="#10B980" stackId="a" stroke="#10B980" type="natural" />
+          <Area dataKey="Submitted" fill="#5FD0AA" stackId="a" stroke="#5FD0AA" type="natural" />
+          <Area dataKey="Completed" fill="#B5E9D8" stackId="a" stroke="#B5E9D8" type="natural" />
           <ChartLegend content={<ChartLegendContent />} />
         </AreaChart>
       </ChartContainer>
