@@ -5,6 +5,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 import { signOut } from "@/lib/auth-client";
 import { ChevronsUpDown, LogOut } from "lucide-react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function ProfileBox({ session }: { session: any }) {
   const { state } = useSidebar();
@@ -37,7 +38,10 @@ export default function ProfileBox({ session }: { session: any }) {
           </PopoverTrigger>
           <PopoverContent className="w-40 p-1" align="end">
             <button
-              onClick={() => signOut()}
+              onClick={() => {
+                signOut();
+                redirect("/login");
+              }}
               className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-red-600 transition-colors hover:bg-red-50"
             >
               <LogOut className="size-4" />

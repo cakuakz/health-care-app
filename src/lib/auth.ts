@@ -11,13 +11,13 @@ export const auth = betterAuth({
   session: {
     cookieCache: {
       enabled: true,
-      maxAge: 1 * 24 * 60 * 60, // 1 days cache duration
-      strategy: "jwe", // can be "jwt" or "compact"
-      refreshCache: false, // Disable stateless refresh
+      maxAge: 1 * 24 * 60 * 60,
+      strategy: "jwe",
+      refreshCache: false,
     },
   },
   account: {
     storeStateStrategy: "cookie",
-    storeAccountCookie: true, // Store account data after OAuth flow in a cookie (useful for database-less flows)
+    storeAccountCookie: true,
   },
 });
